@@ -19,10 +19,10 @@ def sort_numbers(request):
     }
     return HttpResponse(json.dumps(data), content_type='application/json')
  #   return HttpResponse("hiiiiiiiiiiiiiii")
- 
+
 def hi(request, name, age):
     if age<15:
-        message=name+" no puedes entrarrr :("
+        message=name+" no puedes entrarrr sad :("
     else:
         message="holaaaa "+name+ "bienvenido a Platzi"
     return HttpResponse(str(message))
