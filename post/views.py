@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from  datetime import datetime
+from django.contrib.auth.decorators import login_required #pide iniciar seccion
+from django.views.decorators.cache import cache_control, never_cache
+
+
 # Create your views here.
 
 posts = [
@@ -32,6 +36,9 @@ posts = [
         'photo': 'https://picsum.photos/500/700/?image=1076',
     }
 ]
+
+@never_cache
+@login_required()
 def list_post(request):
 
     # content=[]
@@ -44,4 +51,4 @@ def list_post(request):
     #
     # return HttpResponse('<br>'.join(content))
 
-    return render(request, 'feed.html', {'posts':posts})
+    return render(request, 'post/feed.html', {'posts':posts})
