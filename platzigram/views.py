@@ -1,6 +1,9 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 from datetime import datetime
 import json
+
+
 
 def hello_wolrd(request):
     now= datetime.now().strftime('%b %dth, %Y - %H:%M hrs')

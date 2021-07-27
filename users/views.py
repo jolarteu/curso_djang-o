@@ -13,7 +13,6 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 def update_profile(request):
-
     return render(request, 'users/update_profile.html')
 
 
