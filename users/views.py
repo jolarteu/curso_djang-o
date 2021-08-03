@@ -8,10 +8,10 @@ from django.db.utils import IntegrityError
 from users.models import Profile
 from  django.db import models
 from django.contrib.auth.models import User
-from users.forms import ProfileForm
+from users.forms import ProfileForm, SignupForm
 
 # Create your views here.
-
+@login_required()
 def update_profile(request):
 
     profile = request.user.profile
@@ -64,40 +64,21 @@ def login_view(request):
             return render(request, 'users/login.html', context={'error' : 'invalid username and password'})
     return render(request, 'users/login.html')
 
+
 def signup(request):
-
-    if request.method == 'GET':
-        if request.user.is_authenticated:
-            return redirect('feed')
-
     if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = SignupForm()
 
-        username = request.POST['username']
-        password = request.POST['password']
-        password_confirmation=request.POST['password_confirmation']
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        email = request.POST['email']
-
-        if password != password_confirmation:
-            return render(request, 'users/signup.html', {'error': 'Password confirmation does not match'})
-
-        try:
-            user = User.objects.create_user(username=username, password=password)
-        except IntegrityError:
-            return render(request, 'users/signup.html', {'error': 'Username is already in user'})
-
-        user.first_name=first_name
-        user.last_name=last_name
-        user.email=email
-        user.save()
-        profile=Profile(user=user)
-        profile.save()
-
-        login(request, user)
-        return redirect('feed')
-
-    return render(request, 'users/signup.html')
+    return render(
+        request=request,
+        template_name='users/signup.html',
+        context={'form': form}
+    )
 
 @never_cache
 @login_required()

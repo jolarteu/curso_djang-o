@@ -8,7 +8,7 @@ from django.contrib.auth.models import  User
 class  PostAdmin(admin.ModelAdmin):
     readonly_fields = ('created','modified')
 
-    list_display =('pk' ,'title', 'photo' )
+    list_display =('pk', 'profile' ,'title', 'photo' )
 
     # list_display_links = ('pk')
 

@@ -22,12 +22,8 @@
     <form class=form-group action="{% url "signup" %}" method="POST">
       {% csrf_token %}
 
-        <input type="text" class="form-control mb-2" placeholder="Username" name="username" required="true">
-        <input type="password" class="form-control mb-2" placeholder="Password" name="password" required="true">
-        <input type="password" class="form-control mb-2" placeholder="Password confirmation" name="password_confirmation" required="true">
-        <input type="text" class="form-control mb-2" placeholder="First name" name="first_name" required="true">
-        <input type="text" class="form-control mb-2" placeholder="Last name" name="last_name" required="true">
-        <input type="email" class="form-control mb-2" placeholder="Email" name="email" required="true">
+
+        {{form.as_p}}
 
         <button class="btn btn-primary btn-block" type="submit">Register!</button>
 

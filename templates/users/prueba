@@ -1,0 +1,29 @@
+<div class="container-fluid">
+                {% for field in form %}
+
+
+                    <div class="row-fluid">
+                      <div class="span12">
+                        {{ field.errors }}
+                        {{ field.label_tag }}
+                        </div>
+                        <div class="span12">
+                        {{field}}
+                        {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                        {% endif %}
+                        </div>
+
+                    </div>
+                {% endfor %}
+</div>
+
+
+
+
+<input type="text" class="form-control mb-2" placeholder="Username" name="username" required="true">
+<input type="password" class="form-control mb-2" placeholder="Password" name="password" required="true">
+<input type="password" class="form-control mb-2" placeholder="Password confirmation" name="password_confirmation" required="true">
+<input type="text" class="form-control mb-2" placeholder="First name" name="first_name" required="true">
+<input type="text" class="form-control mb-2" placeholder="Last name" name="last_name" required="true">
+<input type="email" class="form-control mb-2" placeholder="Email" name="email" required="true">
